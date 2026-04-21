@@ -1,10 +1,6 @@
-# 魏世奇 · 深天使投资工作站
-科技风个人投资展示站 | GitHub Pages 部署
+# 魏世奇 · 视频生成行业研究（2026年4月）
 
 ## 访问地址
-https://你的GitHub用户名.github.io/仓库名/
+https://Whisky-1990.github.io/Resarch-VideoGeneration/
 
-## 功能
-- 全屏幻灯片展示
-- 基金概况 + 已投项目 + 投资方向
-- 深色科技感 UI
+个人研究，AI生成，如有侵权请联系作者
