@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频生成领域综合性行业报告 2026 | AI Video Industry Report</title>
+    <!-- 引入字体与图标 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* 科技感主题色 */
+            --primary: #00d4ff;
+            --secondary: #9933ff;
+            --accent: #ff2a6d;
+            --dark-bg: #050a1f;
+            --card-bg: rgba(20, 30, 60, 0.3);
+            --border-color: rgba(100, 210, 255, 0.2);
+            --text-light: #e0f7ff;
+            --text-muted: #94a3b8;
+            --gradient-main: linear-gradient(90deg, var(--primary), var(--secondary));
+            --gradient-accent: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 动态科技背景 */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(153, 51, 255, 0.15) 0%, transparent 50%),
+                linear-gradient(180deg, var(--dark-bg) 0%, #0a0f2e 100%);
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 60s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* 侧边导航栏 */
+        .sidebar-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-dot.active {
+            background: var(--primary);
+            box-shadow: 0 0 12px var(--primary);
+            transform: scale(1.3);
+            border-color: var(--primary);
+        }
+
+        .nav-dot:hover {
+            background: var(--secondary);
+            transform: scale(1.2);
+        }
+
+        /* 幻灯片页面核心样式 */
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 80px;
+            position: relative;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 页面进入动画 */
+        .slide-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        /* 玻璃态卡片 */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        /* 网格布局 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+            margin: 30px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin: 30px 0;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        /* 列表样式 */
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .feature-list li::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .data-table thead {
+            background: rgba(0, 212, 255, 0.1);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .data-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 封面页样式 */
+        .cover-slide {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .cover-icon {
+            font-size: 5rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .cover-meta {
+            margin-top: 40px;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tip-text {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* 目录页 */
+        .toc-list {
+            list-style: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .toc-item {
+            margin: 20px 0;
+            padding: 24px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .toc-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.15);
+            transform: translateX(10px);
+        }
+
+        .toc-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .toc-content {
+            flex: 1;
+        }
+
+        .toc-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .toc-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* 标签样式 */
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .tag-primary {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--primary);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .tag-secondary {
+            background: rgba(153, 51, 255, 0.15);
+            color: var(--secondary);
+            border: 1px solid rgba(153, 51, 255, 0.3);
+        }
+
+        .tag-accent {
+            background: rgba(255, 42, 109, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+        }
+
+        /* 时间线样式 */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--gradient-main);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -34px;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--dark-bg);
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        /* 结尾页 */
+        .end-slide {
+            text-align: center;
+        }
+
+        .end-icon {
+            font-size: 6rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+        }
+
+        .end-text {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 20px auto 40px;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 40px 60px;
+            }
+            .sidebar-nav {
+                right: 20px;
+            }
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+            }
+            .sidebar-nav {
+                display: none;
+            }
+            .cover-meta {
+                gap: 20px;
+            }
+            .toc-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .data-table {
+                font-size: 0.85rem;
+            }
+            .data-table th, .data-table td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景动效 -->
+    <div class="bg-animation"></div>
+    <div class="bg-grid"></div>
+
+    <!-- 侧边导航 -->
+    <div class="sidebar-nav" id="sidebarNav">
+        <div class="nav-dot active" data-slide="0"></div>
+        <div class="nav-dot" data-slide="1"></div>
+        <div class="nav-dot" data-slide="2"></div>
+        <div class="nav-dot" data-slide="3"></div>
+        <div class="nav-dot" data-slide="4"></div>
+        <div class="nav-dot" data-slide="5"></div>
+        <div class="nav-dot" data-slide="6"></div>
+        <div class="nav-dot" data-slide="7"></div>
+        <div class="nav-dot" data-slide="8"></div>
+        <div class="nav-dot" data-slide="9"></div>
+    </div>
+
+    <!-- 幻灯片容器 -->
+    <main id="slideContainer">
+        <!-- 0. 封面页 -->
+        <section class="slide" id="slide-0">
+            <div class="slide-container cover-slide">
+                <div class="slide-content">
+                    <div class="cover-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h1>视频生成领域综合性行业报告</h1>
+                    <p class="subtitle">深度解析DiT核心技术、生成范式、市场格局与Agent工程演进</p>
+                    <div class="cover-meta">
+                        <div class="meta-item">
+                            <span class="meta-value">2026年4月</span>
+                            <span class="meta-label">发布时间</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-value">10+</span>
+                            <span class="meta-label">主流模型分析</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-value">3大</span>
+                            <span class="meta-label">核心生成范式</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-value">5亿+</span>
+                            <span class="meta-label">全球用户规模</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-text">
+                    <i class="fas fa-chevron-down"></i>
+                    滚动鼠标或按上下方向键翻页
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. 目录页 -->
+        <section class="slide" id="slide-1">
+            <div class="slide-container">
+                <div class="slide-content">
+                    <h2>报告核心内容</h2>
+                    <ul class="toc-list">
+                        <li class="toc-item" data-target="slide-2">
+                            <div class="toc-number">01</div>
+                            <div class="toc-content">
+                                <div class="toc-title">核心技术架构</div>
+                                <div class="toc-desc">Diffusion Transformer (DiT) 技术原理、参数配置与核心挑战</div>
+                            </div>
+                        </li>
+                        <li class="toc-item" data-target="slide-3">
+                            <div class="toc-number">02</div>
+                            <div class="toc-content">
+                                <div class="toc-title">三大主流生成范式</div>
+                                <div class="toc-desc">文生视频、图生视频、参考生视频的技术路径与能力边界</div>
+                            </div>
+                        </li>
+                        <li class="toc-item" data-target="slide-4">
+                            <div class="toc-number">03</div>
+                            <div class="toc-content">
+                                <div class="toc-title">评价体系与模型竞争格局</div>
+                                <div class="toc-desc">核心评价指标、国际/国内主流模型深度分析</div>
+                            </div>
+                        </li>
+                        <li class="toc-item" data-target="slide-5">
+                            <div class="toc-number">04</div>
+                            <div class="toc-content">
+                                <div class="toc-title">用户群体分层与市场结构</div>
+                                <div class="toc-desc">三层用户画像、市场容量测算与分层竞争策略</div>
+                            </div>
+                        </li>
+                        <li class="toc-item" data-target="slide-6">
+                            <div class="toc-number">05</div>
+                            <div class="toc-content">
+                                <div class="toc-title">Agent工程三大技术流派</div>
+                                <div class="toc-desc">Prompt/Context/Harness Engineering 方法论与演进</div>
+                            </div>
+                        </li>
+                        <li class="toc-item" data-target="slide-7">
+                            <div class="toc-number">06</div>
+                            <div class="toc-content">
+                                <div class="toc-title">产业生态与厂商格局</div>
+                                <div class="toc-desc">全球厂商Agent发展态势与行业演进趋势</div>
+                            </div>
+                        </li>
+                        <li class="toc-item" data-target="slide-8">
+                            <div class="toc-number">07</div>
+                            <div class="toc-content">
+                                <div class="toc-title">行业总结与未来趋势</div>
+                                <div class="toc-desc">2026年核心发展趋势与市场格局预判</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 核心技术架构 -->
+        <section class="slide" id="slide-2">
+            <div class="slide-container">
+                <div class="slide-content">
+                    <h2>核心技术架构：Diffusion Transformer (DiT)</h2>
+                    <p class="subtitle">2024-2026年视频生成领域最具变革性的架构创新，融合扩散模型与Transformer的核心能力</p>
+                    
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3><i class="fas fa-microchip"></i> 核心架构原理</h3>
+                            <ul class="feature-list">
+                                <li>用Transformer编码器-解码器替代传统U-Net，突破局部感受野限制</li>
+                                <li>将视频帧转化为时空补丁序列，通过自注意力捕捉长距离时空依赖</li>
+                                <li>VAE压缩至潜在空间，文本/图像条件引导下完成渐进式去噪生成</li>
+                                <li>实现可变分辨率、时长、宽高比的视频内容生成</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-bolt"></i> 核心技术突破</h3>
+                            <ul class="feature-list">
+                                <li>时空联合建模：空间+时间注意力协同，保障帧间运动连贯性</li>
+                                <li>对数线性稀疏注意力(LLSA)：推理加速28.27倍，训练加速6.09倍</li>
+                                <li>时序条件化去噪：平衡单帧质量与跨帧时序一致性</li>
+                                <li>级联生成架构：先低分辨率骨架，再逐步提升时空精度</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>核心超参数配置与权衡</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>超参数</th>
+                                    <th>典型范围</th>
+                                    <th>影响维度</th>
+                                    <th>核心权衡关系</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>时间步长</td>
+                                    <td>1000-4000步</td>
+                                    <td>生成质量 vs 推理速度</td>
+                                    <td>步数↑ 质量↑ 速度↓</td>
+                                </tr>
+                                <tr>
+                                    <td>注意力头数</td>
+                                    <td>16-64头</td>
+                                    <td>表达能力 vs 显存占用</td>
+                                    <td>头数↑ 能力↑ 显存↑</td>
+                                </tr>
+                                <tr>
+                                    <td>网络深度</td>
+                                    <td>12-48层</td>
+                                    <td>语义建模 vs 梯度稳定性</td>
+                                    <td>层数↑ 建模↑ 训练难度↑</td>
+                                </tr>
+                                <tr>
+                                    <td>模型参数量</td>
+                                    <td>1B-30B</td>
+                                    <td>生成能力 vs 训练成本</td>
+                                    <td>参数量↑ 能力↑ 成本↑</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card">
+                        <h3>核心技术挑战</h3>
+                        <div class="grid-4">
+                            <div>
+                                <span class="tag tag-primary">计算瓶颈</span>
+                                <p>自注意力二次复杂度，高分辨率长视频算力需求呈指数级增长</p>
+                            </div>
+                            <div>
+                                <span class="tag tag-primary">序列扩展</span>
+                                <p>4K/分钟级视频生成需数百GB显存，距离实时应用差距显著</p>
+                            </div>
+                            <div>
+                                <span class="tag tag-primary">时间一致性</span>
+                                <p>物理规律、角色一致性、叙事逻辑的跨帧保持仍是核心短板</p>
+                            </div>
+                            <div>
+                                <span class="tag tag-primary">训练稳定性</span>
+                                <p>高维视频数据梯度噪声大，收敛周期长达数周至数月</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 三大生成范式 -->
+        <section class="slide" id="slide-3">
+            <div class="slide-container">
+                <div class="slide-content">
+                    <h2>三大主流生成范式</h2>
+                    <p class="subtitle">文生视频、图生视频、参考生视频的技术路径、能力边界与选型策略</p>
+
+                    <div class="grid-3">
+                        <div class="card">
+                            <h3><i class="fas fa-file-alt"></i> 文生视频 (T2V)</h3>
+                            <div>
+                                <span class="tag tag-primary">核心链路</span>
+                                <p>文本编码 → 跨模态对齐 → 视频解码</p>
+                            </div>
+                            <h4 style="margin: 20px 0 10px; color: var(--secondary);">核心优势</h4>
+                            <ul class="feature-list">
+                                <li>极致创作自由度，无先验约束</li>
+                                <li>强大的抽象概念与情感表达能力</li>
+                                <li>零素材依赖，创意探索门槛极低</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px; color: var(--accent);">固有局限</h4>
+                            <ul class="feature-list">
+                                <li>语义歧义性，模型理解易偏差</li>
+                                <li>细节可控性不足，角色一致性弱</li>
+                                <li>迭代调试成本高，生成结果随机性强</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px; color: var(--primary);">典型场景</h4>
+                            <p>创意概念验证、广告原型、艺术探索</p>
+                        </div>
+
+                        <div class="card">
+                            <h3><i class="fas fa-image"></i> 图生视频 (I2V)</h3>
+                            <div>
+                                <span class="tag tag-secondary">核心链路</span>
+                                <p>视觉特征提取 → 时序动力学预测 → 视频帧生成</p>
+                            </div>
+                            <h4 style="margin: 20px 0 10px; color: var(--secondary);">核心优势</h4>
+                            <ul class="feature-list">
+                                <li>强视觉锚定，风格/构图稳定性高</li>
+                                <li>角色一致性保障，IP内容创作适配性强</li>
+                                <li>推理速度快，迭代成本低，商业化成熟</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px; color: var(--accent);">固有局限</h4>
+                            <ul class="feature-list">
+                                <li>动态创造性受限，超常规运动生成难</li>
+                                <li>强依赖初始参考图质量，外推生成风险高</li>
+                                <li>风格迁移难度大，跨内容适配性弱</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px; color: var(--primary);">典型场景</h4>
+                            <p>静态内容活化、电商产品展示、角色动画制作</p>
+                        </div>
+
+                        <div class="card">
+                            <h3><i class="fas fa-film"></i> 参考生视频 (R2V)</h3>
+                            <div>
+                                <span class="tag tag-accent">核心链路</span>
+                                <p>参考视频特征提取 → 风格/运动迁移 → 新视频合成</p>
+                            </div>
+                            <h4 style="margin: 20px 0 10px; color: var(--secondary);">核心优势</h4>
+                            <ul class="feature-list">
+                                <li>风格复现精度极高，细粒度可控性强</li>
+                                <li>运动模式精准迁移，运镜/动作一致性强</li>
+                                <li>模板化批量生产效率高，规模化能力突出</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px; color: var(--accent);">固有局限</h4>
+                            <ul class="feature-list">
+                                <li>原创性受限，创新空间受参考约束</li>
+                                <li>对参考视频质量高度敏感，低质参考易失败</li>
+                                <li>版权合规风险突出，商业应用存在法律隐患</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px; color: var(--primary);">典型场景</h4>
+                            <p>风格化批量生产、IP内容延展、广告模板复用</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>三大范式核心能力对比</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>能力维度</th>
+                                    <th>文生视频 (T2V)</th>
+                                    <th>图生视频 (I2V)</th>
+                                    <th>参考生视频 (R2V)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>视觉一致性</td>
+                                    <td>低（易漂移）</td>
+                                    <td>高（锚定稳定）</td>
+                                    <td>中高（依赖参考）</td>
+                                </tr>
+                                <tr>
+                                    <td>创作自由度</td>
+                                    <td>极高（无约束）</td>
+                                    <td>中（受图像约束）</td>
+                                    <td>低（受视频约束）</td>
+                                </tr>
+                                <tr>
+                                    <td>角色一致性</td>
+                                    <td>弱</td>
+                                    <td>强</td>
+                                    <td>中</td>
+                                </tr>
+                                <tr>
+                                    <td>风格可控性</td>
+                                    <td>中</td>
+                                    <td>高</td>
+                                    <td>极高</td>
+                                </tr>
+                                <tr>
+                                    <td>商业化成熟度</td>
+                                    <td>中</td>
+                                    <td>高（60-70%市场份额）</td>
+                                    <td>中高</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 模型竞争格局 -->
+        <section class="slide" id="slide-4">
+            <div class="slide-container">
+                <div class="slide-content">
+                    <h2>评价体系与主流模型竞争格局</h2>
+                    <p class="subtitle">核心评价指标体系、国际/国内头部模型深度分析与市场格局</p>
+
+                    <div class="card">
+                        <h3>核心评价指标体系</h3>
+                        <div class="grid-4">
+                            <div>
+                                <h4><i class="fas fa-eye"></i> 视觉质量</h4>
+                                <p>FID、IS指标，衡量单帧保真度与真实度，顶尖模型FID已降至个位数</p>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-clock"></i> 时序一致性</h4>
+                                <p>运动连贯性、物理合理性检测，核心评估帧间平滑度与物理规律遵循度</p>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-align-center"></i> 语义对齐</h4>
+                                <p>CLIP Score、语义保真度，衡量生成内容与文本/参考指令的匹配度</p>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-server"></i> 效率指标</h4>
+                                <p>推理延迟、显存占用、吞吐量，决定模型商业化部署可行性与成本</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>国际主流模型核心动态</h3>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>OpenAI Sora</h4>
+                                        <span class="tag tag-accent">已关停</span>
+                                        <p>2026年3月全面关停，生命周期收入仅210万美元，日均算力成本达100万美元，周留存率仅2%，核心负责人已离职</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Luma AI Ray系列</h4>
+                                        <span class="tag tag-primary">3D差异化</span>
+                                        <p>3D原生视频生成路径，Ray3模型具备推理循环机制，全球用户超3000万，2026年3月推出Luma Agents，落地顶级广告集团</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Runway Gen系列</h4>
+                                        <span class="tag tag-primary">专业标杆</span>
+                                        <td>专业创作者工具链标杆，Gen-4.5聚焦物理精度与视觉一致性，发布GWM-1通用世界模型，向交互式虚拟环境构建扩展</td>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Pika Labs</h4>
+                                        <span class="tag tag-secondary">社区驱动</span>
+                                        <p>轻量化路径，聚焦3-10秒短视频生成与特效编辑，2026年2月推出AI Selves数字分身，实现品类跃迁，但长视频能力薄弱</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3>国内主流模型核心动态</h3>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>快手可灵 (Kling)</h4>
+                                        <span class="tag tag-primary">商业化领跑</span>
+                                        <p>2025年全年营收10.4亿元，2026年1月ARR达3亿美元以上，全球用户超6000万，独立事业部制，中文语义与电商场景优势显著</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>字节即梦/Seedance</h4>
+                                        <span class="tag tag-primary">生态协同</span>
+                                        <p>四模态融合架构，音画同步能力行业领先，2026年4月推出“小章鱼”协作创作工具，与抖音深度联动，形成创作-分发-变现闭环</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>爱诗科技PixVerse</h4>
+                                        <span class="tag tag-secondary">垂类深耕</span>
+                                        <p>全球用户突破1亿，2026年3月完成3亿美元C轮融资，聚焦动漫、虚拟偶像赛道，角色一致性与特效场景能力突出，月活达2300万</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>生数科技Vidu</h4>
+                                        <span class="tag tag-secondary">学术驱动</span>
+                                        <p>清华联合研发，参考生视频能力领先，2026年Q3版本专为短剧/影视剧打造，Artificial Analysis榜单中国第一、全球第二</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 用户群体与市场结构 -->
+        <section class="slide" id="slide-5">
+            <div class="slide-container">
+                <div class="slide-content">
+                    <h2>用户群体分层与市场结构分析</h2>
+                    <p class="subtitle">三层核心用户画像、市场容量测算与分层竞争策略</p>
+
+                    <div class="grid-3">
+                        <div class="card">
+                            <h3><i class="fas fa-user-tie"></i> Pro群体</h3>
+                            <span class="tag tag-primary">金字塔顶端</span>
+                            <span class="tag tag-primary">占比 <5%</span>
+                            <h4 style="margin: 20px 0 10px;">核心人群</h4>
+                            <p>专业影视制作人员、广告创意总监、游戏动画师、高端内容工作室</p>
+                            <h4 style="margin: 20px 0 10px;">核心诉求</h4>
+                            <ul class="feature-list">
+                                <li>生产级精度与全流程可控性</li>
+                                <li>版权合规保障与专属技术支持</li>
+                                <li>专业工作流深度集成</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px;">付费特征</h4>
+                            <p>付费转化率>50%，年均付费$5000-20000，高ARPU、高留存、高LTV</p>
+                        </div>
+
+                        <div class="card">
+                            <h3><i class="fas fa-user-edit"></i> Pro-C群体</h3>
+                            <span class="tag tag-secondary">增长核心</span>
+                            <span class="tag tag-secondary">占比 15-25%</span>
+                            <h4 style="margin: 20px 0 10px;">核心人群</h4>
+                            <p>进阶创作者、MCN机构、自媒体运营者、电商商家、中小企业营销人员</p>
+                            <h4 style="margin: 20px 0 10px;">核心诉求</h4>
+                            <ul class="feature-list">
+                                <li>生产效率最大化，批量生成能力</li>
+                                <li>风格差异化，模板化工作流</li>
+                                <li>高性价比，低学习门槛</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px;">付费特征</h4>
+                            <p>付费转化率5-15%，年均付费$200-1000，ROI最优，市场收入贡献主力</p>
+                        </div>
+
+                        <div class="card">
+                            <h3><i class="fas fa-user"></i> 泛C群体</h3>
+                            <span class="tag tag-accent">用户基本盘</span>
+                            <span class="tag tag-accent">占比 70-80%</span>
+                            <h4 style="margin: 20px 0 10px;">核心人群</h4>
+                            <p>普通消费者、兴趣用户、社交分享者、学生群体、泛娱乐用户</p>
+                            <h4 style="margin: 20px 0 10px;">核心诉求</h4>
+                            <ul class="feature-list">
+                                <li>低门槛体验，即时满足感</li>
+                                <li>社交裂变属性，趣味化功能</li>
+                                <li>免费基础能力，低成本尝鲜</li>
+                            </ul>
+                            <h4 style="margin: 20px 0 10px;">付费特征</h4>
+                            <p>付费转化率<1%，年均付费$10-50，核心价值为网络效应与数据积累</p>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>市场规模与增长</h3>
+                            <ul class="feature-list">
+                                <li>2025年全球视频生成月活用户突破2亿，2026年预计达5-8亿，年复合增长率超150%</li>
+                                <li>2025年中国市场头部产品合计MAU超3000万，2026年预计突破1亿</li>
+                                <li>行业平均付费转化率2-5%，头部产品可达8-12%</li>
+                                <li>市场结构呈现I2V > R2V > T2V的成熟度排序，I2V占据60-70%的调用量</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>分层市场竞争策略</h3>
+                            <ul class="feature-list">
+                                <li><strong>Pro市场</strong>：技术壁垒+专业服务构建护城河，自研大模型+定制化解决方案，价值定价策略</li>
+                                <li><strong>Pro-C市场</strong>：工具链完整性+工作流集成决胜，全流程覆盖+平台生态联动，灵活订阅制</li>
+                                <li><strong>泛C市场</strong>：社交裂变+内容生态驱动增长，极致简化体验+病毒式传播机制，免费增值模式</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Agent工程三大流派 -->
+        <section class="slide" id="slide-6">
+            <div class="slide-container">
+                <div class="slide-content">
+                    <h2>Agent工程方法论：三大技术流派</h2>
+                    <p class="subtitle">从Prompt Engineering到Harness Engineering，AI视频Agent的系统性演进</p>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Prompt Engineering (提示工程)</h3>
+                                <span class="tag tag-primary">2023年主流</span>
+                                <span class="tag tag-primary">基础层</span>
+                                <h4 style="margin: 15px 0 10px;">核心范式</h4>
+                                <p>通过精细化自然语言指令设计，引导模型产生期望输出，核心解决「如何向AI提问」的问题</p>
+                                <h4 style="margin: 15px 0 10px;">技术要点</h4>
+                                <p>结构化提示模板、少样本示例、思维链引导、镜头语言描述、运动参数指定、风格关键词工程</p>
+                                <h4 style="margin: 15px 0 10px;">能力边界</h4>
+                                <p>自然语言表达精度存在天花板，模型理解易出现偏差，迭代调试成本高，难以支撑复杂多轮任务</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Context Engineering (上下文工程)</h3>
+                                <span class="tag tag-secondary">2025年主流</span>
+                                <span class="tag tag-secondary">进阶层</span>
+                                <h4 style="margin: 15px 0 10px;">核心范式</h4>
+                                <p>通过信息环境构建扩展模型有效认知，核心解决「让AI看到什么」的问题，Prompt⊂Context</p>
+                                <h4 style="margin: 15px 0 10px;">技术要点</h4>
+                                <p>参考素材组织、多模态上下文拼接、记忆机制设计、参考帧序列构建、风格上下文保持、角色一致性维护</p>
+                                <h4 style="margin: 15px 0 10px;">核心价值</h4>
+                                <p>显著提升生成可控性与一致性，专为多轮有状态的复杂应用设计，从单次交互升级为系统工程</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h3>Harness Engineering (驾驭工程)</h3>
+                                <span class="tag tag-accent">2026年前沿</span>
+                                <span class="tag tag-accent">系统层</span>
+                                <h4 style="margin: 15px 0 10px;">核心范式</h4>
+                                <p>通过系统化执行框架保障任务可靠完成，核心解决「如何让模型可靠执行任务」的问题，Context⊂Harness</p>
+                                <h4 style="margin: 15px 0 10px;">技术要点</h4>
+                                <p>工作流编排、工具调用链、反馈循环机制、容错与回退策略、六层闭环架构（信息边界-工具系统-执行编排-记忆状态-评估观测-约束恢复）</p>
+                                <h4 style="margin: 15px 0 10px;">核心价值</h4>
+                                <p>实现生产级可靠性，让Agent在无人工监督下稳定运行，从「辅助工具」升级为「创意合伙人」，是行业竞争的核心壁垒</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>三大流派核心能力对比</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>维度</th>
+                                    <th>Prompt Engineering</th>
+                                    <th>Context Engineering</th>
+                                    <th>Harness Engineering</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>核心关注</td>
+                                    <td>如何向AI提问</td>
+                                    <td>如何让AI看到全景</td>
+                                    <td>如何让AI像团队一样行动</td>
+                                </tr>
+                                <tr>
+                                    <td>工程师角色</td>
+                                    <td>提示词设计师</td>
+                                    <td>上下文架构师</td>
+                                    <td>系统线束工程师</td>
+                                </tr>
+                                <tr>
+                                    <td>输入</td>
+                                    <td>静态文本</td>
+                                    <td>动态上下文管道</td>
+                                    <td>完整的运行环境</td>
+                                </tr>
+                                <tr>
+                                    <td>安全机制</td>
+                                    <td>无</td>
+                                    <td>无</td>
+                                    <td>沙箱+护栏+审计</td>
+                                </tr>
+                                <tr>
+                                    <td>适用场景</td>
+                                    <td>单次简单生成</td>
+                                    <td>多轮一致性生成</td>
+                                    <td>端到端生产级任务</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 产业生态与厂商格局 -->
+        <section class="slide" id="slide-7">
+            <div class="slide-container">
+                <div class="slide-content">
+                    <h2>视频生成Agent产业生态与厂商格局</h2>
+                    <p class="subtitle">全球厂商Agent发展态势、技术路线分化与行业演进趋势</p>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>国际厂商Agent核心布局</h3>
+                            <ul class="feature-list">
+                                <li><strong>Runway Agent</strong>：围绕专业创作者构建三大核心模块（运动控制、风格迁移、协作编辑），深度集成专业工作流，人机协同定位明确</li>
+                                <li><strong>Luma AI Agent</strong>：3D原生+推理型Agent双轮驱动，Luma Agents采用统一推理协调执行架构，落地全球顶级广告集团，实现端到端项目执行</li>
+                                <li><strong>Pika Labs Agent</strong>：特效Agent+社区驱动生态，2026年推出AI Selves数字分身，实现从视频生成到Agent-as-a-Service的品类跃迁</li>
+                                <li><strong>OpenAI Sora Agent</strong>：随项目关停进入战略重组，技术遗产转向机器人与世界模拟方向，核心团队核心人员已离职</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>国内厂商Agent核心布局</h3>
+                            <ul class="feature-list">
+                                <li><strong>快手可灵Agent</strong>：独立事业部制资源倾斜，三大核心模块（中文语义理解、电商场景、长视频生成），与快手电商深度协同，全球化布局领先</li>
+                                <li><strong>字节即梦/Seedance Agent</strong>：四模态融合Agent+抖音生态联动，创新推出“小章鱼”创意合伙人模式，短剧Agent实现10万字剧本一键成片</li>
+                                <li><strong>爱诗科技PixVerse Agent</strong>：垂直深耕虚拟偶像、动漫赛道，角色一致性Agent技术领先，社区驱动模式实现月活2300万</li>
+                                <li><strong>生数科技Vidu Agent</strong>：学术驱动，长视频自主规划Agent能力突出，专为短剧/影视剧工业化生产打造，参考生视频能力行业领先</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>行业核心竞争分化</h3>
+                        <div class="grid-3">
+                            <div>
+                                <h4><i class="fas fa-code-branch"></i> 技术路线分化</h4>
+                                <p><strong>端到端生成Agent</strong>：统一模型直接映射，连贯性强但可控性弱，代表：Sora、Seedance</p>
+                                <p><strong>模块化组合Agent</strong>：多模块协同编排，可控性强、易迭代，代表：Runway、可灵</p>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-cubes"></i> 生态位争夺</h4>
+                                <p><strong>工具型Agent</strong>：单一功能深度优化，竞争关键：功能深度与体验</p>
+                                <p><strong>平台型Agent</strong>：一站式创作环境，竞争关键：生态丰富度</p>
+                                <p><strong>操作系统型Agent</strong>：AI时代创作基础设施，战略制高点</p>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-users"></i> 人才与组织变革</h4>
+                                <p>顶尖人才流动加速，技术型/产品型/生态型负责人决定战略方向</p>
+                                <p>独立事业部制成为主流，资源聚焦与决策效率成为核心竞争力</p>
+                                <p>复合型Harness Engineering系统人才成为行业稀缺资源</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 行业总结与趋势 -->
+        <section class="slide" id="slide-8">
+            <div class="slide-container">
+                <div class="slide-content">
+                    <h2>行业总结与2026年核心趋势</h2>
+                    <p class="subtitle">从单点能力竞争向全栈Agent系统竞争的全面跃迁</p>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3><i class="fas fa-check-circle"></i> 行业核心结论</h3>
+                            <ul class="feature-list">
+                                <li>DiT架构已成为视频生成的绝对技术主流，稀疏注意力优化是突破算力瓶颈的核心方向</li>
+                                <li>三大生成范式形成互补格局，I2V仍是商业化主力，R2V在批量生产场景优势显著，T2V聚焦创意探索</li>
+                                <li>商业化验证成为行业分水岭，Sora的关停与可灵的成功证明：技术领先≠商业成功，成本结构与场景适配是核心</li>
+                                <li>Agent工程方法论完成从Prompt到Harness的三级跳，全栈系统能力成为2026年竞争的核心壁垒</li>
+                                <li>市场格局呈现头部集中+细分深耕的趋势，国内厂商实现从跟随到领跑的跨越，全球化布局加速</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-chart-line"></i> 2026年四大关键趋势</h3>
+                            <ul class="feature-list">
+                                <li><strong>商业化验证成为核心分水岭</strong>：从技术炫技转向可持续商业模型，场景化API与垂直行业解决方案成为主流</li>
+                                <li><strong>垂直行业Agent成为新战场</strong>：短剧、电商、广告、教育等垂直场景，因高付费意愿与明确ROI成为厂商争夺新高地</li>
+                                <li><strong>世界模型成为技术制高点</strong>：从视频生成到世界模拟与物理仿真的技术演进，重塑行业技术路线图</li>
+                                <li><strong>生态整合能力决定长期格局</strong>：与内容分发、电商交易、企业工作流深度整合的生态，才能形成网络效应与数据飞轮</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>未来发展预判</h3>
+                        <div class="grid-4">
+                            <div>
+                                <span class="tag tag-primary">技术演进</span>
+                                <p>模型规模与推理效率双向优化，4K/分钟级视频生成将实现规模化落地，物理仿真精度实现质的突破</p>
+                            </div>
+                            <div>
+                                <span class="tag tag-primary">市场结构</span>
+                                <p>Pro-C群体占比持续提升，成为收入主力，市场向头部厂商集中，垂直赛道玩家将获得差异化生存空间</p>
+                            </div>
+                            <div>
+                                <span class="tag tag-primary">产品形态</span>
+                                <p>从工具型产品向创意协作平台跃迁，Agent将成为产品标配，实现从辅助创作到自主创作的跨越</p>
+                            </div>
+                            <div>
+                                <span class="tag tag-primary">产业生态</span>
+                                <p>形成「基础模型-工具平台-垂直应用-分发变现」的完整产业链，版权合规体系逐步完善，商业化生态走向成熟</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 结尾页 -->
+        <section class="slide" id="slide-9">
+            <div class="slide-container">
+                <div class="slide-content end-slide">
+                    <div class="end-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h2>报告结束</h2>
+                    <p class="end-text">本报告深度解析了2026年视频生成领域的技术、市场、产品与生态全貌，为行业从业者、创作者与投资者提供全面的参考与洞察</p>
+                    <div class="cover-meta">
+                        <div class="meta-item">
+                            <span class="meta-value">2026年4月</span>
+                            <span class="meta-label">发布时间</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 幻灯片核心逻辑
+        const slides = document.querySelectorAll('.slide');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const slideContainer = document.getElementById('slideContainer');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        // 更新激活状态
+        function updateActiveState(index) {
+            // 移除所有激活状态
+            slides.forEach(slide => slide.classList.remove('active'));
+            navDots.forEach(dot => dot.classList.remove('active'));
+            
+            // 添加当前激活状态
+            slides[index].classList.add('active');
+            navDots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        // 跳转到指定幻灯片
+        function goToSlide(index) {
+            if (index < 0 || index >= totalSlides) return;
+            slides[index].scrollIntoView({ behavior: 'smooth' });
+            updateActiveState(index);
+        }
+
+        // 侧边导航点击事件
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+
+        // 目录项点击事件
+        document.querySelectorAll('.toc-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const targetId = item.getAttribute('data-target');
+                const targetSlide = document.getElementById(targetId);
+                const index = Array.from(slides).indexOf(targetSlide);
+                goToSlide(index);
+            });
+        });
+
+        // 键盘上下键翻页
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        // 滚动监听，更新激活状态
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(slides).indexOf(entry.target);
+                    updateActiveState(index);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => {
+            observer.observe(slide);
+        });
+
+        // 页面加载完成，初始化第一个页面
+        window.addEventListener('load', () => {
+            updateActiveState(0);
+        });
+    </script>
+</body>
+</html>
